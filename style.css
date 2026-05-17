@@ -737,6 +737,22 @@ body.cursor-hover .cursor-trail { width: 60px; height: 60px; border-color: rgba(
   transform: rotate(15deg);
 }
 
+.project-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.project-link-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--cyan-400);
+  letter-spacing: 0.05em;
+  transition: opacity var(--dur-fast);
+}
+
+.project-link-text:hover { opacity: 0.7; }
+
 .projects-more {
   text-align: center;
   font-family: var(--font-mono);
