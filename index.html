@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Udayaditya Singh — Developer</title>
+  <meta name="description"
+    content="Portfolio of Udayaditya Singh, a CSE graduate building thoughtful software — games, tools, and everything in between." />
+  <meta property="og:title" content="Udayaditya Singh — Developer" />
+  <meta property="og:description" content="CSE graduate building thoughtful software." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
+
+  <!-- Noise Overlay -->
+  <div class="noise"></div>
+
+  <!-- ─── NAV ─── -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo">U<span class="accent-dot">.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about" class="nav-link" data-text="Story">Story</a></li>
+      <li><a href="#projects" class="nav-link" data-text="Work">Work</a></li>
+      <li><a href="#connect" class="nav-link" data-text="Connect">Connect</a></li>
+    </ul>
+    <a href="mailto:udayaditya@proton.me" class="nav-cta" id="navCta">Say hello ↗</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#about" class="mobile-link">Story</a></li>
+      <li><a href="#projects" class="mobile-link">Work</a></li>
+      <li><a href="#connect" class="mobile-link">Connect</a></li>
+      <li><a href="mailto:udayaditya@proton.me" class="mobile-link accent">Say hello ↗</a></li>
+    </ul>
+  </div>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-orb orb-1"></div>
+    <div class="hero-bg-orb orb-2"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow reveal-up">CSE Graduate · Builder · Problem Solver</p>
+      <h1 class="hero-name">
+        <span class="name-line reveal-up" style="--delay: 0.1s">Udayaditya</span>
+        <span class="name-line name-line-accent reveal-up" style="--delay: 0.2s">Singh<span
+            class="cursor-blink">_</span></span>
+      </h1>
+      <p class="hero-tagline reveal-up" style="--delay: 0.3s">
+        I build software that feels <em>intentional</em> —<br />
+        from games to tools to systems that hum quietly in the background.
+      </p>
+      <div class="hero-actions reveal-up" style="--delay: 0.4s">
+        <a href="#projects" class="btn-primary" id="heroWorksBtn">See my work</a>
+        <a href="#about" class="btn-ghost" id="heroAboutBtn">My story</a>
+      </div>
+    </div>
+
+    <!-- Scrolling ticker -->
+    <div class="ticker-wrap" aria-hidden="true">
+      <div class="ticker">
+        <span>Rust</span><span class="sep">·</span>
+        <span>TypeScript</span><span class="sep">·</span>
+        <span>Python</span><span class="sep">·</span>
+        <span>C++</span><span class="sep">·</span>
+        <span>Game Dev</span><span class="sep">·</span>
+        <span>Systems</span><span class="sep">·</span>
+        <span>AI / ML</span><span class="sep">·</span>
+        <span>Web</span><span class="sep">·</span>
+        <span>Rust</span><span class="sep">·</span>
+        <span>TypeScript</span><span class="sep">·</span>
+        <span>Python</span><span class="sep">·</span>
+        <span>C++</span><span class="sep">·</span>
+        <span>Game Dev</span><span class="sep">·</span>
+        <span>Systems</span><span class="sep">·</span>
+        <span>AI / ML</span><span class="sep">·</span>
+        <span>Web</span><span class="sep">·</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ABOUT ─── -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label reveal-up">01 / Story</span>
+        <h2 class="section-title reveal-up">
+          A little about<br /><em>who I am</em>
+        </h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text reveal-up">
+          <p>
+            I'm a Computer Science graduate with a habit of building things that shouldn't exist yet --
+            or things that exist but could be done much better.
+          </p>
+          <p>
+            My work spans across game engines, clipboard managers, AI agents,
+            and full-stack web apps. I care deeply about the craft: clean architecture,
+            thoughtful UX, and code that the future me won't hate.
+          </p>
+          <p>
+            When I'm not shipping side projects, I'm probably reading about distributed systems,
+            tinkering with emulators, or trying to build mods for games that don't need them.
+          </p>
+        </div>
+
+        <div class="about-facts">
+          <div class="fact-card reveal-up" style="--delay: 0.1s">
+            <span class="fact-num">4+</span>
+            <span class="fact-label">Projects shipped</span>
+          </div>
+          <div class="fact-card reveal-up" style="--delay: 0.2s">
+            <span class="fact-num">∞</span>
+            <span class="fact-label">Curiosity remaining</span>
+          </div>
+          <div class="fact-card reveal-up" style="--delay: 0.3s">
+            <span class="fact-num">1</span>
+            <span class="fact-label">Degree (finally)</span>
+          </div>
+          <div class="fact-card reveal-up" style="--delay: 0.4s">
+            <span class="fact-num">0</span>
+            <span class="fact-label">Days without coffee</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="skills-wrap reveal-up">
+        <div class="skill-group">
+          <h4 class="skill-group-title">Languages</h4>
+          <div class="skill-tags">
+            <span class="tag">Rust</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Python</span>
+            <span class="tag">C++</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">SQL</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4 class="skill-group-title">Frameworks & Tools</h4>
+          <div class="skill-tags">
+            <span class="tag">Tauri</span>
+            <span class="tag">React</span>
+            <span class="tag">SvelteKit</span>
+            <span class="tag">Bun</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Prisma</span>
+            <span class="tag">WebRTC</span>
+            <span class="tag">SQLite</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4 class="skill-group-title">Domains</h4>
+          <div class="skill-tags">
+            <span class="tag accent-tag">Game Dev</span>
+            <span class="tag accent-tag">Systems Programming</span>
+            <span class="tag accent-tag">AI / ML</span>
+            <span class="tag accent-tag">P2P / Networking</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PROJECTS ─── -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label reveal-up">02 / Work</span>
+        <h2 class="section-title reveal-up">
+          Things I've<br /><em>built & shipped</em>
+        </h2>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- Cataclysm -->
+        <article class="project-card reveal-up" style="--delay: 0s" id="proj-cataclysm">
+          <div class="project-card-inner">
+            <div class="project-header">
+              <div class="project-number">01</div>
+              <div class="project-tags">
+                <span class="ptag">Game Dev</span>
+                <span class="ptag">TypeScript</span>
+                <span class="ptag">Strategy</span>
+                <span class="ptag">WebGL</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-name">Cataclysm</h3>
+              <p class="project-desc">
+                A turn-based hex strategy game with unique character mechanics —
+                traps, thresholds, and units that fight dirty.
+                Built from scratch with custom rendering.
+              </p>
+            </div>
+            <div class="project-footer">
+              <span class="project-status status-wip">In progress</span>
+              <a href="https://github.com/sleepcompiler/cataclysm" class="project-link"
+                aria-label="View Cataclysm">↗</a>
+            </div>
+          </div>
+          <div class="project-card-glow"></div>
+        </article>
+
+        <!-- Plaiground -->
+        <article class="project-card reveal-up" style="--delay: 0.1s" id="proj-plaiground">
+          <div class="project-card-inner">
+            <div class="project-header">
+              <div class="project-number">02</div>
+              <div class="project-tags">
+                <span class="ptag">AI</span>
+                <span class="ptag">TypeScript</span>
+                <span class="ptag">Web</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-name">Plaiground</h3>
+              <p class="project-desc">
+                An AI playground for experimenting with language models,
+                specifically making them play Pokemon FireRed on an emulator.
+                Not very useful but watching them make decisions is pretty fascinating in my opinion.
+
+              </p>
+            </div>
+            <div class="project-footer">
+              <span class="project-status status-live">Live</span>
+              <a href="https://github.com/sleepcompiler/plaiground" class="project-link"
+                aria-label="View Plaiground">↗</a>
+            </div>
+          </div>
+          <div class="project-card-glow"></div>
+        </article>
+
+        <!-- ClipMaster 95 -->
+        <article class="project-card reveal-up" style="--delay: 0.2s" id="proj-clipmaster">
+          <div class="project-card-inner">
+            <div class="project-header">
+              <div class="project-number">03</div>
+              <div class="project-tags">
+                <span class="ptag">Rust</span>
+                <span class="ptag">Tauri</span>
+                <span class="ptag">Desktop</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-name">ClipMaster 95</h3>
+              <p class="project-desc">
+                A retro-styled clipboard manager for power users.
+                Global hotkeys, persistent history, and a UI that
+                nods to the golden era of software aesthetics.
+              </p>
+            </div>
+            <div class="project-footer">
+              <span class="project-status status-live">Live</span>
+              <a href="https://github.com/sleepcompiler/clipmaster95" class="project-link"
+                aria-label="View ClipMaster 95">↗</a>
+            </div>
+          </div>
+          <div class="project-card-glow"></div>
+        </article>
+
+        <!-- CineReview -->
+        <article class="project-card reveal-up" style="--delay: 0.3s" id="proj-cinereview">
+          <div class="project-card-inner">
+            <div class="project-header">
+              <div class="project-number">04</div>
+              <div class="project-tags">
+                <span class="ptag">Full Stack</span>
+                <span class="ptag">Prisma</span>
+                <span class="ptag">Node.js</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-name">CineReview</h3>
+              <p class="project-desc">
+                A movie tracking and review platform.
+                Pulls from external APIs, persists data with Prisma,
+                and serves up a clean browsing experience.
+              </p>
+            </div>
+            <div class="project-footer">
+              <span class="project-status status-wip">In progress</span>
+              <a href="https://github.com/sleepcompiler/cinerev" class="project-link" aria-label="View CineReview">↗</a>
+            </div>
+          </div>
+          <div class="project-card-glow"></div>
+        </article>
+
+      </div>
+
+      <!-- More coming -->
+      <p class="projects-more reveal-up">More shipping soon — slowly but surely </p>
+    </div>
+  </section>
+
+  <!-- ─── CONNECT ─── -->
+  <section class="connect" id="connect">
+    <div class="container">
+      <div class="connect-inner reveal-up">
+        <span class="section-label">03 / Connect</span>
+        <h2 class="connect-heading">
+          Let's make<br />something<br /><em>interesting.</em>
+        </h2>
+        <a href="mailto:udayaditya@proton.me" class="connect-cta" id="connectCta">
+          <span>Get in touch</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7v10" />
+          </svg>
+        </a>
+        <p class="connect-hint">No mail client? No problem. Clicking this will copy my email to your clipboard.</p>
+        <div class="connect-links">
+          <a href="https://github.com/sleepcompiler" target="_blank" rel="noopener" class="social-link"
+            id="linkGithub">GitHub</a>
+          <a href="https://linkedin.com/in/udayadityasingh" target="_blank" rel="noopener" class="social-link"
+            id="linkLinkedin">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-name">Udayaditya Singh</span>
+      <span class="footer-copy">© 2026 · Built with care and loads of caffeine.</span>
+      <a href="#hero" class="footer-back" id="backToTop">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast">Email copied to clipboard ✓</div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
