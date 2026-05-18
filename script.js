@@ -6,12 +6,23 @@
   'use strict';
 
   // ─── CURSOR (desktop only) ────────────────
-  const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  const isTouchDevice = 
+    'ontouchstart' in window || 
+    navigator.maxTouchPoints > 0 || 
+    window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
-  if (!isTouchDevice) {
-    const cursor = document.getElementById('cursor');
-    const trail  = document.getElementById('cursorTrail');
+  const cursor = document.getElementById('cursor');
+  const trail  = document.getElementById('cursorTrail');
 
+  if (isTouchDevice) {
+    if (cursor) cursor.style.display = 'none';
+    if (trail) trail.style.display = 'none';
+    document.body.style.cursor = 'auto';
+    
+    // Also reset the nav toggle which has cursor: none in CSS
+    const navToggle = document.getElementById('navToggle');
+    if (navToggle) navToggle.style.cursor = 'auto';
+  } else {
     let mouseX = 0, mouseY = 0;
     let trailX = 0, trailY = 0;
 
