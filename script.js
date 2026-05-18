@@ -5,35 +5,39 @@
 (function () {
   'use strict';
 
-  // ─── CURSOR ───────────────────────────────
-  const cursor = document.getElementById('cursor');
-  const trail  = document.getElementById('cursorTrail');
+  // ─── CURSOR (desktop only) ────────────────
+  const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
-  let mouseX = 0, mouseY = 0;
-  let trailX = 0, trailY = 0;
+  if (!isTouchDevice) {
+    const cursor = document.getElementById('cursor');
+    const trail  = document.getElementById('cursorTrail');
 
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.left = mouseX + 'px';
-    cursor.style.top  = mouseY + 'px';
-  });
+    let mouseX = 0, mouseY = 0;
+    let trailX = 0, trailY = 0;
 
-  // Smooth trailing cursor
-  (function animateTrail() {
-    trailX += (mouseX - trailX) * 0.12;
-    trailY += (mouseY - trailY) * 0.12;
-    trail.style.left = trailX + 'px';
-    trail.style.top  = trailY + 'px';
-    requestAnimationFrame(animateTrail);
-  })();
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top  = mouseY + 'px';
+    });
 
-  // Hover effect on interactive elements
-  const hoverTargets = 'a, button, .project-card, .fact-card, .tag, .btn-primary, .btn-ghost';
-  document.querySelectorAll(hoverTargets).forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-  });
+    // Smooth trailing cursor
+    (function animateTrail() {
+      trailX += (mouseX - trailX) * 0.12;
+      trailY += (mouseY - trailY) * 0.12;
+      trail.style.left = trailX + 'px';
+      trail.style.top  = trailY + 'px';
+      requestAnimationFrame(animateTrail);
+    })();
+
+    // Hover effect on interactive elements
+    const hoverTargets = 'a, button, .project-card, .fact-card, .tag, .btn-primary, .btn-ghost';
+    document.querySelectorAll(hoverTargets).forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+  }
 
   // ─── NAV SCROLL ───────────────────────────
   const nav = document.getElementById('nav');

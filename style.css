@@ -887,7 +887,7 @@ body.cursor-hover .cursor-trail { width: 60px; height: 60px; border-color: rgba(
   .nav { padding: 18px 24px; }
   .nav.scrolled { padding: 12px 24px; }
   .nav-links, .nav-cta { display: none; }
-  .nav-toggle { display: flex; }
+  .nav-toggle { display: flex; cursor: auto; }
 
   .about-grid { grid-template-columns: 1fr; gap: 48px; }
   .projects-grid { grid-template-columns: 1fr; }
@@ -895,6 +895,10 @@ body.cursor-hover .cursor-trail { width: 60px; height: 60px; border-color: rgba(
   .skill-group-title { min-width: auto; }
   .connect-links { flex-wrap: wrap; gap: 20px; }
   .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
+
+  /* ── Disable custom cursor on mobile ── */
+  body { cursor: auto; }
+  .cursor, .cursor-trail { display: none !important; }
 }
 
 @media (max-width: 600px) {
