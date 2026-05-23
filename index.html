@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Udayaditya Singh — Developer</title>
+  <title>Udayaditya Singh -- Developer</title>
   <meta name="description"
-    content="Portfolio of Udayaditya Singh, a CSE graduate building thoughtful software — games, tools, and everything in between." />
-  <meta property="og:title" content="Udayaditya Singh — Developer" />
+    content="Portfolio of Udayaditya Singh, a CSE graduate building thoughtful software -- games, tools, and everything in between." />
+  <meta property="og:title" content="Udayaditya Singh -- Developer" />
   <meta property="og:description" content="CSE graduate building thoughtful software." />
   <meta property="og:type" content="website" />
 
@@ -125,7 +125,7 @@
             thoughtful UX, and code that the future me won't hate.
           </p>
           <p>
-            Lately, I've been exploring distributed systems, game development, and human-computer interaction — usually
+            Lately, I've been exploring distributed systems, game development, and human-computer interaction -- usually
             by building things that are slightly too ambitious for side projects.
           </p>
         </div>
@@ -216,7 +216,7 @@
             <div class="project-body">
               <h3 class="project-name">Cataclysm</h3>
               <p class="project-desc">
-                A turn-based hex strategy game with unique character mechanics —
+                A turn-based hex strategy game with unique character mechanics --
                 traps, thresholds, and units that fight dirty.
                 Built from scratch with custom rendering.
               </p>
@@ -357,7 +357,7 @@
       </div>
 
       <!-- More coming -->
-      <p class="projects-more reveal-up">More shipping soon — slowly but surely </p>
+      <p class="projects-more reveal-up">More shipping soon -- slowly but surely </p>
     </div>
   </section>
 
@@ -397,6 +397,52 @@
 
   <!-- Toast notification -->
   <div class="toast" id="toast">Email copied to clipboard ✓</div>
+
+  <!-- Project Modal -->
+  <div class="project-modal" id="projectModal" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose" aria-label="Close presentation">&times;</button>
+      <div class="modal-layout">
+        <!-- Left: Presentation Media -->
+        <div class="modal-media-container">
+          <div class="modal-slider">
+            <div class="modal-slides-track" id="modalSlidesTrack">
+              <!-- Dynamic slides go here -->
+            </div>
+            <button class="slider-btn prev" id="sliderPrev" aria-label="Previous slide">&#10216;</button>
+            <button class="slider-btn next" id="sliderNext" aria-label="Next slide">&#10217;</button>
+          </div>
+          <div class="slider-indicators" id="sliderIndicators"></div>
+        </div>
+        <!-- Right: Details -->
+        <div class="modal-details">
+          <div class="modal-header-info">
+            <span class="modal-num" id="modalProjectNum">01</span>
+            <h3 class="modal-title" id="modalProjectTitle">Project Title</h3>
+            <div class="modal-tags" id="modalProjectTags">
+              <!-- Tags go here -->
+            </div>
+          </div>
+          <div class="modal-description-wrap">
+            <p class="modal-desc" id="modalProjectDesc">Project description...</p>
+            <div class="modal-more-info">
+              <h4>Key Features</h4>
+              <ul id="modalProjectFeatures">
+                <!-- Dynamic features list -->
+              </ul>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <span class="project-status" id="modalProjectStatus">Live</span>
+            <div class="project-links" id="modalProjectLinks">
+              <!-- Links go here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
