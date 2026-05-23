@@ -326,7 +326,13 @@
         'Responsive layout for browsing popular, trending, and highly-rated movies.',
         'Custom review creation, tracking lists, and ratings logging.'
       ],
-      media: [], // Empty (will show "No screenshots available yet. Visit Live Demo or GitHub for details.")
+      media: [
+        { type: 'image', path: 'media/cinerev/cinerev (1).png', caption: 'CineReview homepage displaying trending, popular, and top-rated movies.' },
+        { type: 'image', path: 'media/cinerev/cinerev (2).png', caption: 'Detailed movie page featuring synopsis, ratings, and genre tags.' },
+        { type: 'image', path: 'media/cinerev/cinerev (3).png', caption: 'Personalized user dashboard for tracking watchlist and reviews.' },
+        { type: 'image', path: 'media/cinerev/cinerev (4).png', caption: 'Interactive movie search and advanced filters.' },
+        { type: 'image', path: 'media/cinerev/cinerev (5).png', caption: 'User reviews and movie ratings discussion panel.' }
+      ],
       links: [
         { text: 'Live Demo', url: 'https://cinerev.onrender.com/' },
         { text: 'GitHub', url: 'https://github.com/sleepcompiler/cinerev' }
