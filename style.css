@@ -434,6 +434,7 @@ body.cursor-hover .cursor-trail { width: 60px; height: 60px; border-color: rgba(
 .ticker {
   display: flex;
   width: max-content;
+  white-space: nowrap;
   animation: tickerScroll 28s linear infinite;
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -446,6 +447,7 @@ body.cursor-hover .cursor-trail { width: 60px; height: 60px; border-color: rgba(
   align-items: center;
   gap: 32px;
   padding-right: 32px;
+  flex-shrink: 0;
 }
 
 .ticker .sep { color: var(--olive-400); }
