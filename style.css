@@ -433,8 +433,7 @@ body.cursor-hover .cursor-trail { width: 60px; height: 60px; border-color: rgba(
 
 .ticker {
   display: flex;
-  gap: 32px;
-  white-space: nowrap;
+  width: max-content;
   animation: tickerScroll 28s linear infinite;
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -442,11 +441,18 @@ body.cursor-hover .cursor-trail { width: 60px; height: 60px; border-color: rgba(
   letter-spacing: 0.08em;
 }
 
+.ticker-group {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding-right: 32px;
+}
+
 .ticker .sep { color: var(--olive-400); }
 
 @keyframes tickerScroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
 }
 
 /* ─────────────────────────────────────────────
@@ -617,6 +623,12 @@ body.cursor-hover .cursor-trail { width: 60px; height: 60px; border-color: rgba(
 
 .project-card:hover {
   border-color: var(--border-hover);
+  transform: translateY(-4px);
+}
+
+.project-card:focus-visible {
+  outline: 2px solid var(--cyan-400);
+  outline-offset: 4px;
   transform: translateY(-4px);
 }
 

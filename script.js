@@ -375,9 +375,11 @@
 
   let currentSlideIndex = 0;
   let activeMedia = [];
+  let previousActiveElement = null;
 
   const openProjectModal = (projectId) => {
     const data = projectData[projectId];
+    previousActiveElement = document.activeElement;
     if (!data) return;
 
     activeMedia = data.media || [];
@@ -503,9 +505,21 @@
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
+
+    // Focus the close button for accessibility
+    if (closeBtn) {
+      closeBtn.focus();
+    }
   };
 
   const closeModal = () => {
+    // Return focus to the trigger element to prevent focus lock/warnings
+    if (previousActiveElement && typeof previousActiveElement.focus === 'function') {
+      previousActiveElement.focus();
+    } else if (modal.contains(document.activeElement)) {
+      document.activeElement.blur();
+    }
+
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('modal-open');
@@ -572,15 +586,22 @@
   sliderPrev.addEventListener('click', prevSlide);
   sliderNext.addEventListener('click', nextSlide);
 
-  // Click on project card to open modal
+  // Click/KeyPress on project card to open modal
   document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('click', (e) => {
-      // Ignore clicks on links inside the card
+    const handleActivation = (e) => {
+      // Ignore clicks/keypresses on links inside the card
       if (e.target.closest('a')) {
         return;
       }
       e.preventDefault();
       openProjectModal(card.id);
+    };
+
+    card.addEventListener('click', handleActivation);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        handleActivation(e);
+      }
     });
   });
 
