@@ -87,6 +87,13 @@
     });
   });
 
+  const navLogo = document.querySelector('.nav-logo');
+  if (navLogo) {
+    navLogo.addEventListener('click', () => {
+      if (menuOpen) toggleMenu();
+    });
+  }
+
   // ─── REVEAL ON SCROLL ─────────────────────
   const revealEls = document.querySelectorAll('.reveal-up');
 

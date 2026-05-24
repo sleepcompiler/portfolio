@@ -174,9 +174,18 @@ body.cursor-hover .cursor-trail { width: 60px; height: 60px; border-color: rgba(
 }
 
 .nav-logo {
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo-img {
+  height: 28px;
+  width: auto;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.nav-logo:hover .nav-logo-img {
+  transform: scale(1.08);
 }
 
 .accent-dot { color: var(--cyan-400); }
