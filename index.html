@@ -32,7 +32,7 @@
   <!-- ─── NAV ─── -->
   <nav class="nav" id="nav">
     <a href="#hero" class="nav-logo">
-      <img src="favicon.png" alt="Udayaditya Singh Logo" class="nav-logo-img" />
+      <img src="favicon.png" alt="nav-logo" class="nav-logo-img" />
     </a>
     <ul class="nav-links">
       <li><a href="#about" class="nav-link" data-text="Story">Story</a></li>
@@ -223,7 +223,8 @@
 
       <div class="projects-grid">
 
-        <article class="project-card reveal-up" style="--delay: 0s" id="proj-cataclysm" tabindex="0" role="button" aria-label="View Cataclysm project details">
+        <article class="project-card reveal-up" style="--delay: 0s" id="proj-cataclysm" tabindex="0" role="button"
+          aria-label="View Cataclysm project details">
           <div class="project-card-inner">
             <div class="project-header">
               <div class="project-number">01</div>
@@ -256,7 +257,8 @@
         </article>
 
         <!-- Plaiground -->
-        <article class="project-card reveal-up" style="--delay: 0.1s" id="proj-plaiground" tabindex="0" role="button" aria-label="View Plaiground project details">
+        <article class="project-card reveal-up" style="--delay: 0.1s" id="proj-plaiground" tabindex="0" role="button"
+          aria-label="View Plaiground project details">
           <div class="project-card-inner">
             <div class="project-header">
               <div class="project-number">02</div>
@@ -285,7 +287,8 @@
         </article>
 
         <!-- ClipMaster 95 -->
-        <article class="project-card reveal-up" style="--delay: 0.2s" id="proj-clipmaster" tabindex="0" role="button" aria-label="View ClipMaster 95 project details">
+        <article class="project-card reveal-up" style="--delay: 0.2s" id="proj-clipmaster" tabindex="0" role="button"
+          aria-label="View ClipMaster 95 project details">
           <div class="project-card-inner">
             <div class="project-header">
               <div class="project-number">03</div>
@@ -313,7 +316,8 @@
         </article>
 
         <!-- CineReview -->
-        <article class="project-card reveal-up" style="--delay: 0.3s" id="proj-cinereview" tabindex="0" role="button" aria-label="View CineReview project details">
+        <article class="project-card reveal-up" style="--delay: 0.3s" id="proj-cinereview" tabindex="0" role="button"
+          aria-label="View CineReview project details">
           <div class="project-card-inner">
             <div class="project-header">
               <div class="project-number">04</div>
@@ -344,37 +348,110 @@
           <div class="project-card-glow"></div>
         </article>
 
-        <!-- P2P Sync Library -->
-        <article class="project-card reveal-up" style="--delay: 0.4s" id="proj-p2psync" tabindex="0" role="button" aria-label="View P2P Sync project details">
-          <div class="project-card-inner">
-            <div class="project-header">
-              <div class="project-number">05</div>
-              <div class="project-tags">
-                <span class="ptag">Rust</span>
-                <span class="ptag">WebRTC</span>
-                <span class="ptag">CRDTs</span>
-              </div>
-            </div>
-            <div class="project-body">
-              <h3 class="project-name">P2P Sync</h3>
-              <p class="project-desc">
-                A local-first synchronization library written in Rust.
-                Leverages CRDTs for seamless conflict resolution, WebRTC for direct
-                peer-to-peer data transfer, and encrypted SQLite for secure local storage
-                in Tauri apps.
-              </p>
-            </div>
-            <div class="project-footer">
-              <span class="project-status status-wip">In progress</span>
-              <div class="project-links">
-                <a href="https://github.com/sleepcompiler/p2p-sync" target="_blank" rel="noopener" class="project-link"
-                  aria-label="GitHub repo for P2P Sync">↗</a>
-              </div>
-            </div>
-          </div>
-          <div class="project-card-glow"></div>
-        </article>
+      </div>
 
+      <!-- ─── COMING SOON / IN THE LAB ─── -->
+      <div class="coming-soon-section reveal-up" style="margin-top: 80px;">
+        <h2 class="coming-soon-title"
+          style="font-size: 2.2rem; font-weight: 700; margin-bottom: 32px; letter-spacing: -0.03em;">
+          In the lab<br /><em>(Coming soon)</em>
+        </h2>
+
+        <div class="projects-grid">
+          <!-- P2P Sync Library -->
+          <article class="project-card reveal-up" style="--delay: 0s" id="proj-p2psync" tabindex="0" role="button"
+            aria-label="View P2P Sync project details">
+            <div class="project-card-inner">
+              <div class="project-header">
+                <div class="project-number">05</div>
+                <div class="project-tags">
+                  <span class="ptag">Rust</span>
+                  <span class="ptag">WebRTC</span>
+                  <span class="ptag">CRDTs</span>
+                </div>
+              </div>
+              <div class="project-body">
+                <h3 class="project-name">P2P Sync</h3>
+                <p class="project-desc">
+                  A local-first synchronization library written in Rust.
+                  Leverages CRDTs for seamless conflict resolution, WebRTC for direct
+                  peer-to-peer data transfer, and encrypted SQLite for secure local storage
+                  in Tauri apps.
+                </p>
+              </div>
+              <div class="project-footer">
+                <span class="project-status status-wip">Coming soon</span>
+                <div class="project-links">
+                  <a href="https://github.com/sleepcompiler/p2p-sync" target="_blank" rel="noopener"
+                    class="project-link" aria-label="GitHub repo for P2P Sync">↗</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-card-glow"></div>
+          </article>
+
+          <!-- Archivist -->
+          <article class="project-card reveal-up" style="--delay: 0.1s" id="proj-archivist" tabindex="0" role="button"
+            aria-label="View Archivist project details">
+            <div class="project-card-inner">
+              <div class="project-header">
+                <div class="project-number">06</div>
+                <div class="project-tags">
+                  <span class="ptag">Rust</span>
+                  <span class="ptag">Tauri</span>
+                  <span class="ptag">Wasm AI</span>
+                </div>
+              </div>
+              <div class="project-body">
+                <h3 class="project-name">Archivist</h3>
+                <p class="project-desc">
+                  A local-first, semantic clipboard manager. Uses local Wasm embeddings
+                  to auto-categorize and save clippings into structured Markdown files,
+                  with a 2D interactive canvas physics graph and PDF exports.
+                </p>
+              </div>
+              <div class="project-footer">
+                <span class="project-status status-wip">Coming soon</span>
+                <div class="project-links">
+                  <a href="https://github.com/sleepcompiler/archivist" target="_blank" rel="noopener"
+                    class="project-link" aria-label="GitHub repo for Archivist">↗</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-card-glow"></div>
+          </article>
+
+          <!-- Wiki Engine -->
+          <article class="project-card reveal-up" style="--delay: 0.2s" id="proj-wiki" tabindex="0" role="button"
+            aria-label="View Wiki Engine project details">
+            <div class="project-card-inner">
+              <div class="project-header">
+                <div class="project-number">07</div>
+                <div class="project-tags">
+                  <span class="ptag">React</span>
+                  <span class="ptag">Node.js</span>
+                  <span class="ptag">Full Stack</span>
+                </div>
+              </div>
+              <div class="project-body">
+                <h3 class="project-name">Wiki Engine</h3>
+                <p class="project-desc">
+                  A lightweight, clean local wiki and knowledge base engine for developers.
+                  Features lightning fast full-text searching, markdown parsing, visual category browsing,
+                  and instant page linking.
+                </p>
+              </div>
+              <div class="project-footer">
+                <span class="project-status status-wip">Coming soon</span>
+                <div class="project-links">
+                  <a href="https://github.com/sleepcompiler/wiki" target="_blank" rel="noopener" class="project-link"
+                    aria-label="GitHub repo for Wiki Engine">↗</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-card-glow"></div>
+          </article>
+        </div>
       </div>
 
       <!-- More coming -->
@@ -388,7 +465,8 @@
       <div class="connect-inner reveal-up">
         <span class="section-label">03 / Connect</span>
         <h2 class="connect-heading">
-          Let's make<br />something<br /><em>interesting.</em>
+          Let's make<br />something<br /><em>interesting<span class="pokeball-dot" id="pokedexUnlockDot"
+              title="Unlock Pokédex"></span></em>
         </h2>
         <a href="mailto:udayaditya@proton.me" class="connect-cta" id="connectCta">
           <span>Get in touch</span>
