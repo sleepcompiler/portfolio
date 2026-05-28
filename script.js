@@ -1370,6 +1370,66 @@
     }, 600);
   });
 
+  // ─── SKILL TOOLTIPS ────────────────────────
+  const skillDescriptions = {
+    'rust': 'A systems programming language focused on safety, speed, and concurrency.',
+    'typescript': 'A strongly typed superset of JavaScript that compiles to plain, readable JavaScript.',
+    'python': 'An interpreted, high-level language known for dynamic semantics and rapid development.',
+    'c++': 'A high-performance compiled language with hardware level control and object-oriented structure.',
+    'javascript': 'A lightweight, interpreted programming language with first-class functions for the web.',
+    'sql': 'Structured Query Language: standard programming language for managing relational databases.',
+    'tauri': 'A framework for building tiny, blazing fast, secure desktop applications using web frontends.',
+    'react': 'A component-based declarative library for building interactive user interfaces.',
+    'sveltekit': 'A high-performance framework for building web applications with Svelte.',
+    'bun': 'A fast all-in-one JavaScript runtime, bundler, test runner, and package manager.',
+    'node.js': 'A cross-platform JavaScript runtime environment built on Chrome\'s V8 engine.',
+    'prisma': 'A next-generation Node.js and TypeScript ORM for clean, type-safe database queries.',
+    'webrtc': 'Real-Time Communication protocol enabling direct peer-to-peer audio/video streaming and data channels.',
+    'sqlite': 'A lightweight, zero-configuration database engine running completely locally.',
+    'game dev': 'Designing and building interactive game loops, physics simulations, and graphics rendering.',
+    'systems programming': 'Developing low-level software architectures, compilers, memory management, and device drivers.',
+    'ai / ml': 'Developing agentic models, natural language interfaces, custom embeddings, and neural nets.',
+    'p2p / networking': 'Decentralized peer-to-peer synchronization, transport layer protocols, and routing systems.'
+  };
+
+  const initSkillTooltips = () => {
+    const tooltip = document.createElement('div');
+    tooltip.className = 'skill-tooltip';
+    tooltip.setAttribute('role', 'tooltip');
+    tooltip.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(tooltip);
+
+    const tags = document.querySelectorAll('.skills-wrap .tag');
+    tags.forEach(tag => {
+      const text = tag.textContent.trim().toLowerCase();
+      const desc = skillDescriptions[text];
+      if (!desc) return;
+
+      tag.addEventListener('mouseenter', () => {
+        tooltip.textContent = desc;
+        tooltip.classList.add('visible');
+        tooltip.setAttribute('aria-hidden', 'false');
+        
+        // Position
+        const rect = tag.getBoundingClientRect();
+        tooltip.style.left = `${rect.left + rect.width / 2}px`;
+        tooltip.style.top = `${rect.top - 8}px`;
+      });
+
+      tag.addEventListener('mouseleave', () => {
+        tooltip.classList.remove('visible');
+        tooltip.setAttribute('aria-hidden', 'true');
+      });
+    });
+  };
+
+  // Run on DOM load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSkillTooltips);
+  } else {
+    initSkillTooltips();
+  }
+
   console.log("💡 Tip: Try running `dex` in this console to unlock the hidden Pokédex tool!");
 
 })();
