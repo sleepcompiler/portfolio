@@ -1148,7 +1148,7 @@ body.cursor-hover .cursor-trail {
 }
 
 /* ─────────────────────────────────────────────
-   PROJECT PRESENTATION MODAL
+   PROJECT DETAILS MODAL
 ───────────────────────────────────────────── */
 body.modal-open {
   overflow: hidden;
@@ -1163,7 +1163,7 @@ body.modal-open {
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--dur-slow) var(--ease-out);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .project-modal.open {
@@ -1174,9 +1174,9 @@ body.modal-open {
 .modal-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(12, 12, 13, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(12, 12, 13, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .modal-content {
@@ -1191,9 +1191,9 @@ body.modal-open {
   border-radius: 24px;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   overflow: hidden;
-  transform: scale(0.96) translateY(20px);
+  transform: scale(0.95) translateY(30px);
   opacity: 0;
-  transition: transform var(--dur-slow) var(--ease-out), opacity var(--dur-slow) var(--ease-out);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .project-modal.open .modal-content {
@@ -1260,7 +1260,7 @@ body.modal-open {
   display: flex;
   width: 100%;
   height: 100%;
-  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-slide {
@@ -1389,6 +1389,7 @@ body.modal-open {
   justify-content: space-between;
   overflow: hidden;
   background: var(--gray-900);
+  text-align: left;
 }
 
 .modal-header-info {

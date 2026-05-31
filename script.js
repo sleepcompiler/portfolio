@@ -47,6 +47,7 @@
   `;
   document.head.appendChild(dotStyle);
 
+
   // ─── CURSOR (desktop only) ────────────────
   const isTouchDevice =
     'ontouchstart' in window ||
@@ -458,19 +459,34 @@
   const modalStatus = document.getElementById('modalProjectStatus');
   const modalLinks = document.getElementById('modalProjectLinks');
 
+  let currentProjectList = [
+    'proj-cataclysm',
+    'proj-plaiground',
+    'proj-clipmaster',
+    'proj-cinereview',
+    'proj-p2psync',
+    'proj-archivist',
+    'proj-wiki'
+  ];
+  let currentProjectIndex = -1;
   let currentSlideIndex = 0;
   let activeMedia = [];
   let previousActiveElement = null;
 
+  // Scroll wheel locks to prevent rapid spinning
+  let scrollLock = false;
+  let projectScrollLock = false;
+
   const openProjectModal = (projectId) => {
     const data = projectData[projectId];
-    previousActiveElement = document.activeElement;
     if (!data) return;
 
+    previousActiveElement = document.activeElement;
+    currentProjectIndex = currentProjectList.indexOf(projectId);
     activeMedia = data.media || [];
     currentSlideIndex = 0;
 
-    // Populate text content
+    // Populate details
     modalNum.textContent = data.number;
     modalTitle.textContent = data.title;
     modalDesc.textContent = data.description;
@@ -486,7 +502,7 @@
       modalTags.appendChild(span);
     });
 
-    // Populate key features
+    // Populate features
     modalFeatures.innerHTML = '';
     data.features.forEach(feat => {
       const li = document.createElement('li');
@@ -506,19 +522,16 @@
       modalLinks.appendChild(a);
     });
 
-    // Populate slides and dots
+    // Populate slides
     slidesTrack.innerHTML = '';
     sliderIndicators.innerHTML = '';
 
     if (activeMedia.length === 0) {
-      // Show custom placeholder
       const slide = document.createElement('div');
       slide.className = 'modal-slide';
 
       const placeholder = document.createElement('div');
       placeholder.className = 'modal-placeholder';
-
-      // Inline SVG screen icon
       placeholder.innerHTML = `
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
@@ -526,7 +539,6 @@
           <line x1="12" y1="17" x2="12" y2="21" />
         </svg>
       `;
-
       const p = document.createElement('p');
       if (projectId === 'proj-p2psync') {
         p.textContent = 'No screencaptures to show. Visit GitHub for project details.';
@@ -540,7 +552,6 @@
       sliderPrev.classList.add('hidden');
       sliderNext.classList.add('hidden');
     } else {
-      // Populate images and videos
       activeMedia.forEach((media, idx) => {
         const slide = document.createElement('div');
         slide.className = 'modal-slide';
@@ -552,7 +563,6 @@
           video.loop = true;
           video.muted = true;
           video.playsInline = true;
-          video.autoplay = false;
           slide.appendChild(video);
         } else {
           const img = document.createElement('img');
@@ -563,7 +573,6 @@
         }
         slidesTrack.appendChild(slide);
 
-        // Dot indicators
         const dot = document.createElement('button');
         dot.className = 'indicator-dot' + (idx === 0 ? ' active' : '');
         dot.setAttribute('aria-label', 'Go to slide ' + (idx + 1));
@@ -573,7 +582,6 @@
         sliderIndicators.appendChild(dot);
       });
 
-      // Show navigation if multiple items
       if (activeMedia.length > 1) {
         sliderPrev.classList.remove('hidden');
         sliderNext.classList.remove('hidden');
@@ -583,22 +591,18 @@
       }
     }
 
-    // Reset slide position
     updateSlider();
 
-    // Show modal
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
 
-    // Focus the close button for accessibility
     if (closeBtn) {
       closeBtn.focus();
     }
   };
 
   const closeModal = () => {
-    // Return focus to the trigger element to prevent focus lock/warnings
     if (previousActiveElement && typeof previousActiveElement.focus === 'function') {
       previousActiveElement.focus();
     } else if (modal.contains(document.activeElement)) {
@@ -609,36 +613,27 @@
     modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('modal-open');
 
-    // Pause all playing videos
     const videos = slidesTrack.querySelectorAll('video');
-    videos.forEach(video => {
-      video.pause();
-    });
+    videos.forEach(video => video.pause());
   };
 
   const updateSlider = () => {
     if (activeMedia.length === 0) return;
 
-    // Slide transition
     slidesTrack.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
 
-    // Update dots
     const dots = sliderIndicators.querySelectorAll('.indicator-dot');
     dots.forEach((dot, idx) => {
       dot.classList.toggle('active', idx === currentSlideIndex);
     });
 
-    // Control video playback on slide transition
     const slides = slidesTrack.querySelectorAll('.modal-slide');
-
     slides.forEach((slide, idx) => {
       const video = slide.querySelector('video');
       if (video) {
         if (idx === currentSlideIndex) {
-          // Play current video (with fallback if browser blocks it)
           video.play().catch(() => { });
         } else {
-          // Pause other videos
           video.pause();
         }
       }
@@ -671,17 +666,13 @@
   sliderPrev.addEventListener('click', prevSlide);
   sliderNext.addEventListener('click', nextSlide);
 
-  // Click/KeyPress on project card to open modal
+  // Click on project cards to open modal
   document.querySelectorAll('.project-card').forEach(card => {
     const handleActivation = (e) => {
-      // Ignore clicks/keypresses on links inside the card
-      if (e.target.closest('a')) {
-        return;
-      }
+      if (e.target.closest('a')) return;
       e.preventDefault();
       openProjectModal(card.id);
     };
-
     card.addEventListener('click', handleActivation);
     card.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -690,7 +681,7 @@
     });
   });
 
-  // Keyboard accessibility
+  // keyboard handlers
   document.addEventListener('keydown', (e) => {
     if (!modal.classList.contains('open')) return;
 
@@ -702,6 +693,173 @@
       prevSlide();
     }
   });
+
+  // Wheel hijacking inside modal
+  modal.addEventListener('wheel', (e) => {
+    if (!modal.classList.contains('open')) return;
+
+    const onMedia = e.target.closest('.modal-media-container');
+
+    if (onMedia) {
+      if (activeMedia.length <= 1) return;
+      e.preventDefault();
+
+      if (scrollLock) return;
+      scrollLock = true;
+
+      if (e.deltaY > 0) {
+        nextSlide();
+      } else if (e.deltaY < 0) {
+        prevSlide();
+      }
+
+      setTimeout(() => {
+        scrollLock = false;
+      }, 400);
+    } else {
+      e.preventDefault();
+
+      if (projectScrollLock) return;
+      projectScrollLock = true;
+
+      const contentEl = modal.querySelector('.modal-content');
+      if (contentEl) {
+        contentEl.style.transition = 'opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)';
+        contentEl.style.opacity = '0';
+        contentEl.style.transform = 'scale(0.98)';
+      }
+
+      setTimeout(() => {
+        let nextProjIndex = currentProjectIndex;
+        if (e.deltaY > 0) {
+          nextProjIndex = (currentProjectIndex + 1) % currentProjectList.length;
+        } else if (e.deltaY < 0) {
+          nextProjIndex = (currentProjectIndex - 1 + currentProjectList.length) % currentProjectList.length;
+        }
+
+        const nextProjId = currentProjectList[nextProjIndex];
+        const data = projectData[nextProjId];
+        if (data) {
+          const videos = slidesTrack.querySelectorAll('video');
+          videos.forEach(v => v.pause());
+
+          currentProjectIndex = nextProjIndex;
+          activeMedia = data.media || [];
+          currentSlideIndex = 0;
+
+          modalNum.textContent = data.number;
+          modalTitle.textContent = data.title;
+          modalDesc.textContent = data.description;
+          modalStatus.textContent = data.status;
+          modalStatus.className = 'project-status ' + data.statusClass;
+
+          modalTags.innerHTML = '';
+          data.tags.forEach(tag => {
+            const span = document.createElement('span');
+            span.className = 'ptag';
+            span.textContent = tag;
+            modalTags.appendChild(span);
+          });
+
+          modalFeatures.innerHTML = '';
+          data.features.forEach(feat => {
+            const li = document.createElement('li');
+            li.textContent = feat;
+            modalFeatures.appendChild(li);
+          });
+
+          modalLinks.innerHTML = '';
+          data.links.forEach(link => {
+            const a = document.createElement('a');
+            a.href = link.url;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            a.className = 'project-link-text';
+            a.textContent = link.text + ' ↗';
+            modalLinks.appendChild(a);
+          });
+
+          slidesTrack.innerHTML = '';
+          sliderIndicators.innerHTML = '';
+
+          if (activeMedia.length === 0) {
+            const slide = document.createElement('div');
+            slide.className = 'modal-slide';
+            const placeholder = document.createElement('div');
+            placeholder.className = 'modal-placeholder';
+            placeholder.innerHTML = `
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+            `;
+            const p = document.createElement('p');
+            if (nextProjId === 'proj-p2psync') {
+              p.textContent = 'No screencaptures to show. Visit GitHub for project details.';
+            } else {
+              p.textContent = 'No screenshots available yet. Visit GitHub or Live Demo for project details.';
+            }
+            placeholder.appendChild(p);
+            slide.appendChild(placeholder);
+            slidesTrack.appendChild(slide);
+            sliderPrev.classList.add('hidden');
+            sliderNext.classList.add('hidden');
+          } else {
+            activeMedia.forEach((media, idx) => {
+              const slide = document.createElement('div');
+              slide.className = 'modal-slide';
+
+              if (media.type === 'video') {
+                const video = document.createElement('video');
+                video.src = media.path;
+                video.controls = true;
+                video.loop = true;
+                video.muted = true;
+                video.playsInline = true;
+                slide.appendChild(video);
+              } else {
+                const img = document.createElement('img');
+                img.src = media.path;
+                img.alt = media.caption;
+                img.loading = 'lazy';
+                slide.appendChild(img);
+              }
+              slidesTrack.appendChild(slide);
+
+              const dot = document.createElement('button');
+              dot.className = 'indicator-dot' + (idx === 0 ? ' active' : '');
+              dot.setAttribute('aria-label', 'Go to slide ' + (idx + 1));
+              dot.addEventListener('click', () => {
+                goToSlide(idx);
+              });
+              sliderIndicators.appendChild(dot);
+            });
+
+            if (activeMedia.length > 1) {
+              sliderPrev.classList.remove('hidden');
+              sliderNext.classList.remove('hidden');
+            } else {
+              sliderPrev.classList.add('hidden');
+              sliderNext.classList.add('hidden');
+            }
+          }
+
+          updateSlider();
+        }
+
+        if (contentEl) {
+          contentEl.style.transition = 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+          contentEl.style.opacity = '1';
+          contentEl.style.transform = 'scale(1)';
+        }
+
+        setTimeout(() => {
+          projectScrollLock = false;
+        }, 600);
+      }, 250);
+    }
+  }, { passive: false });
 
   // Usage:
   //   dex()
@@ -1124,17 +1282,20 @@
   function showWelcomeScreen() {
     if (!dexScreen) return;
     dexScreen.innerHTML = `
-      <div style="text-align: center; margin-top: 20px;">
-        <span style="font-size: 1.8rem; display: block; margin-bottom: 10px;"></span>
-        <div style="font-weight: bold; font-size: 0.85rem; margin-bottom: 12px; color: #fff;">congratulations. you have discovered the hidden pokedex.</div>
-        <p style="color: #8cd993; font-size: 0.72rem; line-height: 1.4; padding: 0 10px;">
-          Type a name, number, or stats query below. <br/><br/>
-          Try: <br/>
-          • <span style="color: #fff; text-decoration: underline; cursor: pointer;" class="sample-search">snorlax</span><br/>
-          • <span style="color: #fff; text-decoration: underline; cursor: pointer;" class="sample-search">snorlax info</span><br/>
-          • <span style="color: #fff; text-decoration: underline; cursor: pointer;" class="sample-search">snorlax stats</span><br/>
-          • <span style="color: #fff; text-decoration: underline; cursor: pointer;" class="sample-search">name 8 stage 1</span><br/>
-          • <span style="color: #fff; text-decoration: underline; cursor: pointer;" class="sample-search">8 4 i</span>
+      <div style="text-align: center; margin-top: 15px;">
+        <div style="font-size: 0.95rem; font-weight: bold; margin-bottom: 8px; color: #fff; letter-spacing: 0.05em;">Congratulations on finding the Pokédex!</div>
+        <div style="font-size: 0.72rem; line-height: 1.5; margin-bottom: 16px; color: #8cd993; padding: 0 8px; border-bottom: 1px dashed rgba(163, 255, 172, 0.2); padding-bottom: 12px;">
+          Originally a solver script built to crack a CS50 crossword puzzle, this database tool now lives on as a fully functional retro Pokédex interface.
+        </div>
+        <p style="color: #a3ffac; font-size: 0.72rem; line-height: 1.4; padding: 0 10px; text-align: left;">
+          Query database records by name or index, analyze base stats, or use brute-force crossword commands.
+          <br/><br/>
+          <strong style="color: #fff; display: block; margin-bottom: 4px;">Quick Queries:</strong>
+          • <span style="color: #fff; text-decoration: underline; cursor: pointer;" class="sample-search">snorlax</span> (Overview)<br/>
+          • <span style="color: #fff; text-decoration: underline; cursor: pointer;" class="sample-search">snorlax stats</span> (Base Stats)<br/>
+          • <span style="color: #fff; text-decoration: underline; cursor: pointer;" class="sample-search">snorlax info</span> (Raw CSV Data)<br/>
+          • <span style="color: #fff; text-decoration: underline; cursor: pointer;" class="sample-search">name 8 stage 1</span> (Stage/Length)<br/>
+          • <span style="color: #fff; text-decoration: underline; cursor: pointer;" class="sample-search">8 4 i</span> (Evolved, 8L, 'i' @ 4th pos)
         </p>
       </div>
     `;
@@ -1409,7 +1570,7 @@
         tooltip.textContent = desc;
         tooltip.classList.add('visible');
         tooltip.setAttribute('aria-hidden', 'false');
-        
+
         // Position
         const rect = tag.getBoundingClientRect();
         tooltip.style.left = `${rect.left + rect.width / 2}px`;
@@ -1430,6 +1591,6 @@
     initSkillTooltips();
   }
 
-  console.log("💡 Tip: Try running `dex` in this console to unlock the hidden Pokédex tool!");
+  console.log("Try running `dex` in this console to unlock the hidden Pokédex tool!");
 
 })();
